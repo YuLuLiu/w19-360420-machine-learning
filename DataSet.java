@@ -249,8 +249,30 @@ public class DataSet {
 
   ////////////////////////////////////////////////////////////////////////////
   // TASK 4: make a method here called distanceEuclid 
-
-  ////////////////////////////////////////////////////////////////////////////
-
+	public static double distanceEuclid(DataPoint point_1, DataPoint point_2)
+	{
+		double[] differences = new double[point_1.getX().length];
+		double[] squared_diff = new double[point_1.getX().length];
+		double sum = 0;
+		double Eud_dist = 0;
+		
+		//calculate the differences
+		for (int i = 0; i < point_1.getX().length; i++){
+			differences[i] = point_1.getX()[i] - point_2.getX()[i];
+		}
+		
+		//square the differences
+		for (int j = 0; j < point_1.getX().length; j++){
+			squared_diff[j] = Math.pow((differences[j]),2);
+		}
+		
+		//add the squared differences and square root it
+		for (int m = 0; m < point_1.getX().length; m++){
+			sum = sum + squared_diff[m];
+		}
+		
+		Eud_dist = Math.sqrt(sum);
+		return Eud_dist;
+	}
 
 }
