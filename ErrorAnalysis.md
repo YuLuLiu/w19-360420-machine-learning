@@ -19,12 +19,10 @@ The mean accuracy I got is 97.69% with a standard deviation of 0.0089. Since the
 Line 200 in `DataSet.java` is a method that display the frequencies of labels in the dataset. In the dataset that I used, `breastCancer.csv`, there are 444 datapoints representing benigh tumors and 237 datapoints representing malignant tumors. If the the model always predict the most frequent class in the dataset, which is in this case the benign tumors, the accuracy percentage would be 444/(444+237) = 0.6520. Since 97.69% is higher than 65.2%, the model is predicting better than the baseline model. 
 
 ### the types of errors that our classifier makes
-##### *Accuracy* is only one way that we can evaluate model performance. However in the context of medical diagnosis, different types of classification errors carry importances.
-what is a False Positive, a False Negative?
+##### *Accuracy* is only one way that we can evaluate model performance. However in the context of medical diagnosis, different types of classification errors carry importances. What is a False Positive, a False Negative?
 A false positive is when we predict a positive answer, but the truth is actually negative. In the case of predicting whether a tumor is benigh or malignant, a false positive would be when the model predicts that the tumor is malignant when it is actually benign. A false negative is the inverse. We predict a negative answer, but the truth is actually positive. In this case, a false negative would be when the model predicts that the tumor is benign when it is actually malignant. A false negative is therefore more serious than a false positive since the patient, receiving the negative answer, will not be treated. 
 
-##### Extend your analysis in the previous step (with the 1000 runs) to keep track of **Recall** and **Precision** as well.
-What makes these two measures different?
+##### Extend your analysis in the previous step (with the 1000 runs) to keep track of **Recall** and **Precision** as well. What makes these two measures different?
 I obtained:
 - mean of precision: 96.14% with a standard deviation of 0.042
 - mean of recall: 97.32% with a standard deviation of 0.033
@@ -42,4 +40,4 @@ Since the KNN model's precision and recall are both greater than this baseline, 
 ##### How do the above results change with the **hyperparameter** *k*?
 I created a loop that increases the hyperparameter k at each iteration. 
 The accuracy percentage decreased. The precision percentage increased. The recall percentage decreased. These trends are illustrated in the graph below.
-![alt text](??? "Graph")
+![alt text](https://github.com/YuLuLiu/w19-360420-machine-learning/blob/master/graph.PNG "Graph")
