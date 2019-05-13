@@ -4,12 +4,11 @@ import java.util.Arrays;
 
 
 
-public class kNNMain{
+public class RandomPred{
 
   public static void main(String... args) throws FileNotFoundException{
-	
-	int k = 3;
-	while (k < 50){
+	  
+	int k = 3; //the k value of the k nearest neighbors
 	double[] accuracies = new double [1000];
 	double[] precisions  = new double [1000];
 	double[] recalls = new double [1000];
@@ -18,7 +17,6 @@ public class kNNMain{
 	for(int i = 0; i < accuracies.length; i ++){
 		List<DataPoint> train_dataset = DataSet.getTrainingSet(dataset, 0.7);
 		List<DataPoint> test_dataset = DataSet.getTrainingSet(dataset, 0.3);
-		KNNClassifier classifier = new KNNClassifier(k);
 		int total_num = test_dataset.size();
 		double num_true_neg = 0.0; //so the division would work.
 		double num_true_pos = 0.0;
@@ -26,27 +24,35 @@ public class kNNMain{
 		double num_false_neg = 0.0;
 		for (int j = 0; j < test_dataset.size(); j++)
 		{
-			String prediction = classifier.predict(train_dataset, test_dataset.get(j));
+			//random prediction
+			double random = Math.random();
+			int prediction = 0;
+			if (random < 0.5){
+				prediction = 6; //benign
+			}
+			else{
+				prediction = 9; //malignant
+			}
 			//True negative
-			if (prediction.length() == test_dataset.get(j).getLabel().length() && prediction.length() == 6) //benign
+			if (prediction == test_dataset.get(j).getLabel().length() && prediction == 6) //benign
 			{
 				num_true_neg = num_true_neg + 1;
 			}
 			
 			//True positive
-			if (prediction.length() == test_dataset.get(j).getLabel().length() && prediction.length() == 9) //malignant
+			if (prediction == test_dataset.get(j).getLabel().length() && prediction == 9) //malignant
 			{
 				num_true_pos = num_true_pos + 1;
 			}
 			
 			//False positive
-			else if (prediction.length() > test_dataset.get(j).getLabel().length()) //if pred = malignant, truth = benign. 
+			else if (prediction > test_dataset.get(j).getLabel().length()) //if pred = malignant, truth = benign. 
 			{
 				num_false_pos = num_false_pos + 1;
 			}
 			
 			//False negative
-			else if (prediction.length() < test_dataset.get(j).getLabel().length()) //if pred = benign, truth = malignant. 
+			else if (prediction < test_dataset.get(j).getLabel().length()) //if pred = benign, truth = malignant. 
 			{
 				num_false_neg = num_false_neg + 1;
 			}
@@ -66,21 +72,9 @@ public class kNNMain{
 	double mean_recall = mean(recalls);
 	double standardDeviation_recall = standardDeviation(recalls);
 	
-	//print for easy read
-	//System.out.println("k: " + k);
-	//System.out.println("mean of accuracy: " + (mean_accuracy*100) + "%	" + "standard deviation: " + (standardDeviation_accuracy*100));
-	//System.out.println("mean of precision: " + (mean_precision*100) + "%	" + "standard deviation: " + (standardDeviation_precision*100));
-	//System.out.println("mean of recall: " + (mean_recall*100) + "%	" + "standard deviation: " + (standardDeviation_recall*100));
-	
-	
-	//print for graph
-	System.out.println(k);
-	System.out.println((mean_accuracy*100));
-	System.out.println((mean_precision*100));
-	System.out.println((mean_recall*100));
-	
-	k = k + 5; 
-	}//for k loop
+	System.out.println("mean of accuracy: " + (mean_accuracy*100) + "%	" + "standard deviation: " + (standardDeviation_accuracy*100));
+	System.out.println("mean of precision: " + (mean_precision*100) + "%	" + "standard deviation: " + (standardDeviation_precision*100));
+	System.out.println("mean of recall: " + (mean_recall*100) + "%	" + "standard deviation: " + (standardDeviation_recall*100));
   }//main
 
 	
